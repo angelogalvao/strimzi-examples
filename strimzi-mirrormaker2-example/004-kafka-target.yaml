@@ -1,12 +1,62 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: controller
+  labels:
+    strimzi.io/cluster: kafka-cluster
+    namespace: strimzi-mm-example-target
+spec:
+  replicas: 3
+  roles:
+    - controller
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 512Mi
+        kraftMetadata: shared
+        deleteClaim: true
+---
+
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: broker
+  labels:
+    strimzi.io/cluster: kafka-cluster
+    namespace: strimzi-mm-example-target
+spec:
+  replicas: 3
+  roles:
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 512Mi
+        # Indicates that this directory will be used to store Kraft metadata log
+        kraftMetadata: shared
+        deleteClaim: true
+      - id: 1
+        type: persistent-claim
+        size: 512Mi
+        deleteClaim: true
+---
+
 kind: Kafka
 apiVersion: kafka.strimzi.io/v1beta2
 metadata:
   name: kafka-cluster
   namespace: strimzi-mm-example-target
+  annotations:
+    strimzi.io/node-pools: enabled
+    strimzi.io/kraft: enabled
 spec:
   kafka:
-    version: 3.8.0
-    replicas: 3
+    version: 4.0.0
+    metadataVersion: 4.0-IV3
     listeners:
       - name: plain
         port: 9092
@@ -22,16 +72,7 @@ spec:
       transaction.state.log.min.isr: 2
       default.replication.factor: 3
       min.insync.replicas: 2
-      inter.broker.protocol.version: '3.8'
-    storage:
-      type: persistent-claim
-      class: lvms-vg1
-      deleteClaim: true
-      size: 128m
-  zookeeper:
-    replicas: 3
-    storage:
-      type: ephemeral
+      inter.broker.protocol.version: '4.0'
   entityOperator:
     topicOperator: {}
     userOperator: {}

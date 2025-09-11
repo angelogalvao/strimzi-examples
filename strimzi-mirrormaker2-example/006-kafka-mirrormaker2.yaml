@@ -4,8 +4,8 @@ metadata:
   name: kafka-mm2-cluster
   namespace: strimzi-mm-example-target
 spec:
-  version: 3.8.0
-  replicas: 2
+  version: 4.0.0
+  replicas: 1
   connectCluster: cluster-target
   clusters:
     - alias: cluster-source
@@ -13,9 +13,9 @@ spec:
     - alias: cluster-target
       bootstrapServers: 'kafka-cluster-kafka-bootstrap.strimzi-mm-example-target.svc:9092'
       config:
-        config.storage.replication.factor: -1
-        offset.storage.replication.factor: -1
-        status.storage.replication.factor: -1
+        config.storage.replication.factor: 1
+        offset.storage.replication.factor: 1
+        status.storage.replication.factor: 1
   mirrors:
     - sourceCluster: cluster-source
       targetCluster: cluster-target
@@ -28,9 +28,6 @@ spec:
           offset-syncs.topic.replication.factor: 1
           sync.topic.acls.enabled: 'false'
           replication.policy.class: io.strimzi.kafka.connect.mirror.IdentityReplicationPolicy
-      heartbeatConnector:
-        config:
-          heartbeats.topic.replication.factor: 1
       checkpointConnector:
         autoRestart:
           enabled: true
@@ -41,5 +38,5 @@ spec:
           sync.group.offsets.interval.seconds: 10
           refresh.groups.interval.seconds: 10
           refresh.topics.interval.seconds: 10
-      topicsPattern: .*.topic
+      topicsPattern: .*
       groupsPattern: .*

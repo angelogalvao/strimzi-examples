@@ -2,8 +2,8 @@
 
 ## Enviroment 
 
-* Openshift Container Platform 4.17
-* AMQ Streams 2.8, based on Strimizi 0.43.0
+* Openshift Container Platform 4.19
+* AMQ Streams 3.0, based on Strimizi 0.43.0
 
 ## Instalation
 
@@ -103,7 +103,12 @@ bin/kafka-producer-perf-test.sh --topic test.replication.1.topic --throughput 1 
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test.replication.1.topic --group group.1 --from-beginning --max-messages 10
 ```
 
-9. Consume 10 more messages
+10. Consume 10 more messages
 ```sh 
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test.replication.1.topic --group group.1  --max-messages 10
+```
+
+11. List the topics undereplicated
+```sh 
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --under-replicated 
 ```
