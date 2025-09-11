@@ -27,16 +27,16 @@ spec:
           replication.factor: 1
           offset-syncs.topic.replication.factor: 1
           sync.topic.acls.enabled: 'false'
-          replication.policy.class: io.strimzi.kafka.connect.mirror.IdentityReplicationPolicy
+          replication.policy.class: org.apache.kafka.connect.mirror.IdentityReplicationPolicy
       checkpointConnector:
         autoRestart:
           enabled: true
         config:
           checkpoints.topic.replication.factor: 1
-          replication.policy.class: io.strimzi.kafka.connect.mirror.IdentityReplicationPolicy
+          replication.policy.class: org.apache.kafka.connect.mirror.IdentityReplicationPolicy
           sync.group.offsets.enabled: true
-          sync.group.offsets.interval.seconds: 10
-          refresh.groups.interval.seconds: 10
-          refresh.topics.interval.seconds: 10
+          sync.group.offsets.interval.seconds: 60
+          refresh.groups.interval.seconds: 60
+          refresh.topics.interval.seconds: 60
       topicsPattern: .*
       groupsPattern: .*
