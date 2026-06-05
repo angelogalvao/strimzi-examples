@@ -38,10 +38,8 @@ oc get secret test-kafka-cluster-cluster-ca-cert -o jsonpath='{.data.ca\.p12}' |
 
 - Run the client producer:
 ```sh
-./kafka-console-producer.sh   --bootstrap-server citi-kafka-cluster-kafka-tls-bootstrap-citi-04461950.apps-crc.testing:443    --topic test-topic   --command-config client.properties
+./kafka-console-producer.sh   --bootstrap-server <bootstrap-server-route-url>:443    --topic test-topic   --command-config client.properties
 ```
-
-/Users/asouza/redhat/middleware/streams/streams-3.2/bin/kafka-console-producer.sh --bootstrap-server citi-kafka-cluster-kafka-tls-bootstrap-citi-04461950.apps-crc.testing:443 --topic test-topic --command-config client.properties
 
 ## Now with custom certificates
 
@@ -63,8 +61,7 @@ oc create secret tls custom-certificate --cert=custom-cert.crt --key=custom-key.
 oc create -f kafka-custom-certificate.yml
 ```
 
-- Get the new custom certificate from the cluster
-
+- Run the client producer:
 ```sh
-oc get secret custom-certificate -o jsonpath='{.data.tls\.crt}'  | base64 -d  > custom-cert.crt
+./kafka-console-producer.sh   --bootstrap-server <bootstrap-server-route-url>:443    --topic test-topic   --command-config client.properties
 ```
