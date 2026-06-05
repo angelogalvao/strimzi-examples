@@ -1,0 +1,9 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaUser
+metadata:
+  labels:
+    strimzi.io/cluster: citi-kafka-cluster
+  name: test-kafka-user
+spec:
+  authentication:
+    type: tls
