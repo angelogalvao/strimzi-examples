@@ -98,7 +98,7 @@ bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic test.replication.1
 bin/kafka-producer-perf-test.sh --topic test.replication.1.topic --throughput 1 --num-records 100 --record-size 64 --producer-props acks=1  --print-metrics --producer-props bootstrap.servers=localhost:9092
 ```
 
-9. Consume 10 messages to the topic
+9. Consume 10 messages to the topic     
 ```sh 
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test.replication.1.topic --group group.1 --from-beginning --max-messages 10
 ```

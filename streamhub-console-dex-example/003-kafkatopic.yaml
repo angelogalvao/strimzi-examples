@@ -1,9 +1,9 @@
 kind: KafkaTopic
 apiVersion: kafka.strimzi.io/v1
 metadata:
-  name: example.topic
+  name: example-topic
   labels:
-    strimzi.io/cluster: kafka-cluster
+    strimzi.io/cluster: streams-kafka-3-cluster
 spec:
   partitions: 10
   replicas: 3

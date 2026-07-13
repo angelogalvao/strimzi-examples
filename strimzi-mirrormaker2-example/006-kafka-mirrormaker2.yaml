@@ -1,4 +1,4 @@
-kind: KafkaMirrorMaker2
+3kind: KafkaMirrorMaker2
 apiVersion: kafka.strimzi.io/v1beta2
 metadata:
   name: kafka-mm2-cluster
@@ -40,3 +40,4 @@ spec:
           refresh.topics.interval.seconds: 60
       topicsPattern: .*
       groupsPattern: .*
+      
