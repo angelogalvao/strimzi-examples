@@ -92,7 +92,7 @@ cat *.yaml | envsubst | oc apply -f - -n ${NAMESPACE}
 Just install the StreamHub Console. Return to the same folder of this document.
 ~~~bash
 export AUTHSERVER=https://console-dex.$(echo $CLUSTER_DOMAIN)
-cat 005-streamhubconsole.yaml | envsubst | oc apply -f - 
+cat 005-streamshubconsole.yaml | envsubst | oc apply -f - 
 ~~~
 
 Find out the route URL and test it. 
