@@ -21,8 +21,9 @@ Notice that the name of this project will be used bellow. If you choose a differ
 Creaate Kafka the Kafka Cluster and an example topic
 ~~~bash
 oc apply -f 001-kafkanodepool.yaml
-oc apply -f 002-kafka.yaml
-oc apply -f 003-kafkatopic.yaml
+oc apply -f 002-kafka-metrics-configmap.yaml
+oc apply -f 003-kafka.yaml
+oc apply -f 004-kafkatopic.yaml
 ~~~
 
 ## Install Dex
@@ -91,5 +92,7 @@ cat *.yaml | envsubst | oc apply -f - -n ${NAMESPACE}
 Just install the StreamHub Console. Return to the same folder of this document.
 ~~~bash
 export AUTHSERVER=https://console-dex.$(echo $CLUSTER_DOMAIN)
-cat 004-streamhubconsole.yaml | envsubst | oc apply -f - 
+cat 005-streamhubconsole.yaml | envsubst | oc apply -f - 
 ~~~
+
+Find out the route URL and test it. 
